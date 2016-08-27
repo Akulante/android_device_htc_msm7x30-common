@@ -84,11 +84,6 @@ TARGET_DISABLE_ARM_PIE := true
 BOARD_PROVIDES_LIBRIL := true
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 
-# Use dlmalloc instead of jemalloc because it's
-# supposedly better in single-threaded applications
-# http://blog.poweredbytoast.com/memory-allocators
-MALLOC_IMPL := dlmalloc
-
 # Wifi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WLAN_DEVICE := bcmdhd
