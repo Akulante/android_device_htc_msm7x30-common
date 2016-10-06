@@ -19,5 +19,5 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := libhealthd.msm7x30
 LOCAL_SRC_FILES := healthd_board_htc-msm7x30.cpp
-LOCAL_C_INCLUDES := system/core/healthd
+LOCAL_C_INCLUDES := system/core/healthd/include/healthd
 include $(BUILD_STATIC_LIBRARY)
