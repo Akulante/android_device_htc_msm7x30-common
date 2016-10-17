@@ -89,16 +89,17 @@ BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 # http://blog.poweredbytoast.com/memory-allocators
 MALLOC_SVELTE := true
 
-# Wifi
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WLAN_DEVICE := bcmdhd
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+# This file is for bcmdhd wifi since so many HTC 8660 devices use it
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE                := bcmdhd
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_FW_PATH_STA := "/system/vendor/firmware/fw_bcmdhd.bin"
-WIFI_DRIVER_FW_PATH_AP := "/system/vendor/firmware/fw_bcmdhd_apsta.bin"
-WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_BAND                        := 802_11_ABG
+WIFI_DRIVER_FW_PATH_STA          := "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
 
 # rmt_storage
 BOARD_USES_LEGACY_MMAP := true
@@ -108,33 +109,6 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm7x30
 
 # Recovery
 TARGET_RECOVERY_DEVICE_DIRS += device/htc/msm7x30-common
-
-# SELinux
-#BOARD_SEPOLICY_DIRS += \
-#    device/htc/msm7x30-common/sepolicy
-
-#BOARD_SEPOLICY_UNION += \
-#    app.te \
-#    bluetooth.te \
-#    device.te \
-#    domain.te \
-#    drmserver.te \
-#    file_contexts \
-#    file.te \
-#    hci_init.te \
-#    healthd.te \
-#    init.te \
-#    init_shell.te \
-#    keystore.te \
-#    kickstart.te \
-#    mediaserver.te \
-#    rild.te \
-#    surfaceflinger.te \
-#    system_server.te \
-#    ueventd.te \
-#    untrusted_app.te \
-#    vold.te \
-#    wpa.te
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
