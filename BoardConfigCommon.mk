@@ -1,4 +1,4 @@
-# Copyright (C) 2011 The CyanogenMod Project
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
 # SELinux
 -include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_HARDWARE_CLASS := device/htc/msm7x30-common/cmhw
-
 TARGET_SPECIFIC_HEADER_PATH := device/htc/msm7x30-common/include
 
 # General
@@ -31,20 +29,22 @@ TARGET_USES_QCOM_BSP := true
 BOARD_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 BOARD_USES_QCOM_HARDWARE := true
 
-# No bootloader image with ROM
+# Bootloader
 TARGET_NO_BOOTLOADER := true
 
+# Kernel
+TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
 BOARD_KERNEL_CMDLINE := no_console_suspend=1  androidboot.selinux=permissive androidboot.hardware=htc7x30
 BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE) msmsdcc_power_gpio=88
 BOARD_KERNEL_BASE := 0x04400000
 BOARD_KERNEL_PAGE_SIZE := 4096
 
+# CM Hardware
+BOARD_HARDWARE_CLASS := device/htc/msm7x30-common/cmhw
+
 # Build EXT4 and F2FS tools
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
-# Kernel
-TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
 
 # Audio
 BOARD_HAVE_HTC_AUDIO := true
@@ -122,6 +122,7 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm7x30
 # Recovery
 TARGET_RECOVERY_DEVICE_DIRS += device/htc/msm7x30-common
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+BRIGHTNESS_SYS_FILE := /sys/devices/platform/leds-pm8058/leds/keyboard-backlight/brightness
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011 The CyanogenMod Project
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,23 +14,25 @@
 # limitations under the License.
 #
 
-PRODUCT_PACKAGE_OVERLAYS += device/htc/msm7x30-common/overlay
-
-COMMON_PATH := device/htc/msm7x30-common
-
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
-
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 # System Properties
--include $(COMMON_PATH)/system_prop.mk
+-include $(LOCAL_PATH)/system_prop.mk
 
-# Ramdisk files
-PRODUCT_PACKAGES += \
-	init.htc7x30.rc \
-	init.htc7x30.power.rc \
-	init.htc7x30.usb.rc \
-	ueventd.htc7x30.rc
+# Device uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_LOCALES += en_US
+
+# Boot Animation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+TARGET_BOOTANIMATION_HALF_RES := true
+PRODUCT_BOOTANIMATION := $(LOCAL_PATH)/rootdir/system/media/bootanimation.zip
+
+# Overlay
+PRODUCT_PACKAGE_OVERLAYS += device/htc/msm7x30-common/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -48,14 +50,21 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-# media configs
+# Codecs
 PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
-	$(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-	$(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
-	$(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf
+	$(LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+	init.htc7x30.rc \
+	init.htc7x30.power.rc \
+	init.htc7x30.usb.rc \
+	ueventd.htc7x30.rc
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -128,8 +137,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth/Wifi firmware
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/firmware/bcm4330.hcd:system/vendor/firmware/bcm4330.hcd \
-    $(COMMON_PATH)/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
+    $(LOCAL_PATH)/firmware/bcm4330.hcd:system/vendor/firmware/bcm4330.hcd \
+    $(LOCAL_PATH)/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
 
 # ODPUpdater
 PRODUCT_PACKAGES += ODPUpdater
