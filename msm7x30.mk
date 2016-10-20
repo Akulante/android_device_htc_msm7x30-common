@@ -149,5 +149,8 @@ else
 PRODUCT_PROPERTY_OVERRIDES += ro.odp.releasetype=SNAPSHOT
 endif
 
+# Wifi
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+
 # proprietary blobs for msm7x30
 $(call inherit-product, vendor/htc/msm7x30-common/msm7x30-common-vendor.mk)
