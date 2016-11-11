@@ -40,7 +40,6 @@
 #include <fcntl.h>
 #include <time.h>
 #include <errno.h>
-#include <assert.h>
 #include <ctype.h>
 #include <sys/un.h>
 #include <assert.h>
