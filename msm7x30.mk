@@ -141,7 +141,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
 
 # ODPUpdater
-PRODUCT_PACKAGES += ODPUpdater
+#PRODUCT_PACKAGES += ODPUpdater
 
 ifeq ($(TARGET_UNOFFICIAL_BUILD_ID),)
 PRODUCT_PROPERTY_OVERRIDES += ro.odp.releasetype=NIGHTLY

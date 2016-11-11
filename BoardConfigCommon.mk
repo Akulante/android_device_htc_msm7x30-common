@@ -32,6 +32,10 @@ BOARD_USES_QCOM_HARDWARE := true
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 
+# Boot Image
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := device/htc/msm7x30-common/boot/custombootimg.mk
+
 # CM Hardware
 BOARD_HARDWARE_CLASS := device/htc/msm7x30-common/cmhw
 
@@ -118,11 +122,11 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 BRIGHTNESS_SYS_FILE := /sys/devices/platform/leds-pm8058/leds/keyboard-backlight/brightness
 
 # Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-ifeq ($(WITH_DEXPREOPT),)
-	WITH_DEXPREOPT := true
-endif
-endif
+#ifeq ($(HOST_OS),linux)
+#ifeq ($(WITH_DEXPREOPT),)
+#	WITH_DEXPREOPT := true
+#endif
+#endif
 
 # TWRP
 TW_THEME := portrait_mdpi
