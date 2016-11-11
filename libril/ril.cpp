@@ -150,6 +150,7 @@ typedef struct RequestInfo {
     char cancelled;
     char local;         // responses to local commands do not go back to command process
     RIL_SOCKET_ID socket_id;
+	int wasAckSent;    // Indicates whether an ack was sent earlier
 } RequestInfo;
 
 typedef struct UserCallbackInfo {
@@ -182,7 +183,7 @@ static int s_fdDebug_socket2 = -1;
 static int s_fdWakeupRead;
 static int s_fdWakeupWrite;
 
-int wasAckSent;    // Indicates whether an ack was sent earlier
+int s_wakelock_count = 0;
 
 static struct ril_event s_commands_event;
 static struct ril_event s_wakeupfd_event;
